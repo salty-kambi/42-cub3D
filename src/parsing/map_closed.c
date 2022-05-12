@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:16:37 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/07 19:12:25 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 15:12:59 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ int	check_each_char(char **map)
 
 int	check_map_closed(char **map)
 {
-	char **cpy;
-	
+	char	**cpy;
+
 	cpy = map_cpy(map);
 	if (!cpy)
 		return (write_error("malloc", 1));
 	if (check_map_border(cpy) || check_each_char(cpy))
-	 	return (write_error("map not closed", 1));
+		return (write_error("map not closed", 1));
 	free_tab(cpy);
 	return (0);
 }

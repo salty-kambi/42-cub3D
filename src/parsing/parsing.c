@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:11:09 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/07 16:48:29 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 15:27:12 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,47 @@ void	print_tab(char **tab)
 	}
 }
 
+int	check_txt_path(t_file_data *fdata)
+{
+	int	fd;
+	int	n;
+
+	n = 0;
+	fd = open(fdata->north, O_RDONLY);
+	if (fd == -1)
+		n = 1;
+	close(fd);
+	fd = open(fdata->south, O_RDONLY);
+	if (fd == -1)
+		n = 1;
+	close(fd);
+	fd = open(fdata->west, O_RDONLY);
+	if (fd == -1)
+		n = 1;
+	close(fd);
+	fd = open(fdata->east, O_RDONLY);
+	if (fd == -1)
+		n = 1;
+	close(fd);
+	if (n)
+		return (write_error("no such texture file", 1));
+	return (0);
+}
+
 int	map_parsing(t_data *data, char *name)
 {
 	if (stlen(name) < 5 || stncmp(name + stlen(name) - 4, ".cub", 4))
 		return (write_error("Not a .cub file format", 1));
-	if (read_map_file(name, &(data->file)) || map_file_error(data->file))
+	if (read_map_file(name, &(data->fdata.file)))
 		return (1);
-	 if (data_extract(data, data->file))
-		 return (write_error("malloc", 1));
-	free(data->file);
-	if (check_map_closed(data->map))
+	if (map_file_error(data->fdata.file))
 		return (1);
+	if (data_extract(data, data->fdata.file))
+		return (write_error("malloc", 1));
+	if (check_map_closed(data->map) || check_txt_path(&data->fdata))
+	{
+		free_tab(data->map);
+		return (1);
+	}
 	return (0);
 }

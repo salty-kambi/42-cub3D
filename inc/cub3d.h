@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/07 19:38:06 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 17:06:02 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,45 @@
 # include <math.h>
 # include "../mlx/mlx.h"
 
-typedef struct s_texture {
+typedef struct s_file_data {
+	char	*file;
 	char	*north;
 	char	*south;
 	char	*west;
 	char	*east;
 	int		floor;
 	int		celling;
-}				t_texture;
+}	t_file_data;
+
+typedef struct s_image {
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		wi_he[2];
+}	t_image;
+
+typedef struct s_texture {
+	t_image	north;
+	t_image	south;
+	t_image	west;
+	t_image	east;
+	t_image	floor;
+	t_image	celling;
+}	t_texture;
 
 typedef struct s_player {
-	int	pos[2];
+	float	pos[2];
 }	t_player;
 
 typedef struct s_data {
 	void		*mlx;
 	void		*win;
-	char		*file;
+	int			display[2];
 	char		**map;
 	int			run;
+	t_file_data	fdata;
 	t_texture	txt;
 	t_player	play;
 }				t_data;
@@ -47,6 +67,13 @@ typedef struct s_data {
 //		data.c
 void	data_init(t_data *data);
 int		data_clear(t_data *data);
+void	fdata_clear(t_file_data *fdata);
+
+//le_ray
+//		image.c
+void	img_init(t_data *data);
+//		game_init.c
+void	game_init(t_data *data);
 
 //parsing
 //		parsing.c

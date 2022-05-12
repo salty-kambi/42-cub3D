@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:05 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/07 19:25:50 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 17:03:08 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,45 @@
 
 void	data_init(t_data *data)
 {
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "cub3D");
-	data->file = 0;
+	data->display[0] = 1280;
+	data->display[1] = 720;
 	data->map = 0;
-	data->txt.north = 0;
-	data->txt.south = 0;
-	data->txt.east = 0;
-	data->txt.west = 0;
+	data->fdata.file = 0;
+	data->fdata.north = 0;
+	data->fdata.south = 0;
+	data->fdata.east = 0;
+	data->fdata.west = 0;
+}
+
+void	img_clear(void	*mlx, t_texture *txt)
+{
+	mlx_destroy_image(mlx, txt->north.img);
+	mlx_destroy_image(mlx, txt->south.img);
+	mlx_destroy_image(mlx, txt->west.img);
+	mlx_destroy_image(mlx, txt->east.img);
+	//mlx_destroy_image(mlx, txt->floor.img);
+	//mlx_destroy_image(mlx, txt->celling.img);
+}
+
+void	fdata_clear(t_file_data *fdata)
+{
+	if (fdata->file)
+		free(fdata->file);
+	if (fdata->north)
+		free(fdata->north);
+	if (fdata->east)
+		free(fdata->east);
+	if (fdata->south)
+		free(fdata->south);
+	if (fdata->west)
+		free(fdata->west);
 }
 
 int	data_clear(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	if (data->file)
-		free(data->file);
-	if (data->map)
-		free_tab(data->map);
-	if (data->txt.north)
-		free(data->txt.north);
-	if (data->txt.east)
-		free(data->txt.east);
-	if (data->txt.south)
-		free(data->txt.south);
-	if (data->txt.west)
-		free(data->txt.west);
+	free_tab(data->map);
+	img_clear(data->mlx, &data->txt);
 	exit(0);
-	return (1);
+	return (0);
 }

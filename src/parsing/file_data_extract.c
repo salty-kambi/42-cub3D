@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:18:39 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/03 18:22:56 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:18:10 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,35 @@ int	fc_rgb_shift(char *file)
 void	line_process_fc(t_data *data, char *file, int x)
 {
 	if (!stncmp(file + x, "F ", 2))
-		data->txt.floor = fc_rgb_shift(file + x + 2);
+		data->fdata.floor = fc_rgb_shift(file + x + 2);
 	if (!stncmp(file + x, "C ", 2))
-		data->txt.celling = fc_rgb_shift(file + x + 2);
+		data->fdata.celling = fc_rgb_shift(file + x + 2);
 }
 
 int	line_process(t_data *data, char *file, int x)
 {
 	if (!stncmp(file + x, "NO ", 3))
 	{
-		data->txt.north = ft_substr(file + x, 3, len_line(file + x) - 3);
-		if (!data->txt.north)
+		data->fdata.north = ft_substr(file + x, 3, len_line(file + x) - 3);
+		if (!data->fdata.north)
 			return (0);
 	}
 	else if (!stncmp(file + x, "SO ", 3))
 	{
-		data->txt.south = ft_substr(file + x, 3, len_line(file + x) - 3);
-		if (!data->txt.south)
+		data->fdata.south = ft_substr(file + x, 3, len_line(file + x) - 3);
+		if (!data->fdata.south)
 			return (0);
 	}
 	else if (!stncmp(file + x, "WE ", 3))
 	{
-		data->txt.west = ft_substr(file + x, 3, len_line(file + x) - 3);
-		if (!data->txt.west)
+		data->fdata.west = ft_substr(file + x, 3, len_line(file + x) - 3);
+		if (!data->fdata.west)
 			return (0);
 	}
 	else if (!stncmp(file + x, "EA ", 3))
 	{
-		data->txt.east = ft_substr(file + x, 3, len_line(file + x) - 3);
-		if (!data->txt.east)
+		data->fdata.east = ft_substr(file + x, 3, len_line(file + x) - 3);
+		if (!data->fdata.east)
 			return (0);
 	}
 	return (x + len_line(file + x) + 1);

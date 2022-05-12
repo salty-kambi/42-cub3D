@@ -6,7 +6,7 @@
 #    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/05/03 16:18:42 by lsuau            ###   ########.fr        #
+#    Updated: 2022/05/12 16:58:53 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ INC 		=	inc/cub3d.h
 
 SRC			=	main.c \
 				data.c
+
+RAY			=	image.c \
+				game_init.c
 
 PARSING		=	parsing.c \
 				file_data_extract.c \
@@ -32,6 +35,7 @@ UTILS		= 	error.c \
 				ft_sixth.c
 
 SRCS		=	${SRC} \
+				${addprefix le_ray/, ${RAY}} \
 				${addprefix parsing/, ${PARSING}} \
 				${addprefix utils/, ${UTILS}}
 
