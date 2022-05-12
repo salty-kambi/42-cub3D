@@ -3,8 +3,8 @@ NO texture/etoiles.xpm
 SO texture/iron.xpm
 WE texture/pipe.xpm
 EA texture/sure.xpm
-C 225, 30, 0
-F 255, 255, 0
+C 45, 45, 45
+F 89, 57, 24
 
         1111111111111111111111111
         1000000000110000000000001

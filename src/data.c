@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:05 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/12 17:03:08 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 18:06:43 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	img_clear(void	*mlx, t_texture *txt)
 	mlx_destroy_image(mlx, txt->south.img);
 	mlx_destroy_image(mlx, txt->west.img);
 	mlx_destroy_image(mlx, txt->east.img);
-	//mlx_destroy_image(mlx, txt->floor.img);
-	//mlx_destroy_image(mlx, txt->celling.img);
+	mlx_destroy_image(mlx, txt->floor.img);
+	mlx_destroy_image(mlx, txt->celling.img);
 }
 
 void	fdata_clear(t_file_data *fdata)

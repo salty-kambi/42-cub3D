@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/12 17:06:02 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/12 18:11:09 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ void	fdata_clear(t_file_data *fdata);
 
 //le_ray
 //		image.c
-void	img_init(t_data *data);
+void	rgb_to_rect_img(void *mlx, t_image *spr, int rgb, int display[2]);
 //		game_init.c
 void	game_init(t_data *data);
+void	img_init(t_data *data);
 
 //parsing
 //		parsing.c
