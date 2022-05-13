@@ -6,7 +6,7 @@
 #    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/05/12 16:58:53 by lsuau            ###   ########.fr        #
+#    Updated: 2022/05/13 11:12:26 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC			=	main.c \
 				data.c
 
 RAY			=	image.c \
-				game_init.c
+				game_init.c \
+				minimap.c
 
 PARSING		=	parsing.c \
 				file_data_extract.c \

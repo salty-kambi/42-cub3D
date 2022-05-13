@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/12 18:11:09 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/13 12:10:00 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_texture {
 	t_image	east;
 	t_image	floor;
 	t_image	celling;
+	t_image	mini;
+	t_image	border;
 }	t_texture;
 
 typedef struct s_player {
@@ -71,10 +73,13 @@ void	fdata_clear(t_file_data *fdata);
 
 //le_ray
 //		image.c
+void	pixel_put(t_image *spr, int x, int y, int rgb);
 void	rgb_to_rect_img(void *mlx, t_image *spr, int rgb, int display[2]);
 //		game_init.c
 void	game_init(t_data *data);
 void	img_init(t_data *data);
+//		minimap.c
+void	minimap(t_data *data);
 
 //parsing
 //		parsing.c
@@ -87,7 +92,7 @@ int		len_line(char *file);
 //		file_map_extract.c
 char	**file_map_extract(char *file);
 //		map_closed.c
-int		check_map_closed(char **map);
+int		check_map_closed(t_player *play, char **map);
 //		file_error.c
 int		map_file_error(char *file);
 int		elem_complete(int *elem);
