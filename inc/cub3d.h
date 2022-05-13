@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 12:10:00 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/13 17:56:00 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ typedef struct s_image {
 	int		endian;
 	int		wi_he[2];
 }	t_image;
+
+typedef struct s_minimap {
+	t_image	*mini;
+	int		ps;
+	int		pos_p[2];
+	int		range;
+	int		l;
+	int		x;
+	int		y;
+}	t_minimap;
 
 typedef struct s_texture {
 	t_image	north;
@@ -79,7 +89,16 @@ void	rgb_to_rect_img(void *mlx, t_image *spr, int rgb, int display[2]);
 void	game_init(t_data *data);
 void	img_init(t_data *data);
 //		minimap.c
+void	mp_init(t_minimap *mp, t_image *mini, t_player play, int l);
+void	put_pix_img_map(t_minimap *mp, char c);
 void	minimap(t_data *data);
+void	put_square(t_minimap *mp, int x, int y, int rgb);
+//		print_minimap.c
+void	print_nw_minimap(t_minimap *mp, char **map);
+void	print_ne_minimap(t_minimap *mp, char **map);
+void	print_sw_minimap(t_minimap *mp, char **map);
+void	print_se_minimap(t_minimap *mp, char **map);
+void	print_minimap(t_image *mini, int l, char **map, t_player play);
 
 //parsing
 //		parsing.c
@@ -89,6 +108,7 @@ int		read_map_file(char *name, char **file);
 //		file_data_extract.c
 int		data_extract(t_data *data, char *file);
 int		len_line(char *file);
+int		rgb_shift(char *file);
 //		file_map_extract.c
 char	**file_map_extract(char *file);
 //		map_closed.c

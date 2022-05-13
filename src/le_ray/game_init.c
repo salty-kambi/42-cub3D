@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:34:20 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 11:59:12 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/13 17:50:21 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	minimap_preload(void *mlx, t_image *spr, int display[2])
 	l = display[0];
 	if (l > display[1])
 		l = display[1];
+	if (l % 2)
+		l++;
+	while (l % 64)
+		l += 2;
 	l = (l * 25) / 100;
 	spr->img = mlx_new_image(mlx, l, l);
 	spr->addr = mlx_get_data_addr(
 			spr->img, &spr->bpp, &spr->line_len, &spr->endian);
-	
 }
 
 void	border_preload(void *mlx, t_image *spr, int display[2])
@@ -42,6 +45,10 @@ void	border_preload(void *mlx, t_image *spr, int display[2])
 	l = display[0];
 	if (l > display[1])
 		l = display[1];
+	if (l % 2)
+		l++;
+	while (l % 64)
+		l += 2;
 	l = (l * 25) / 100 + 2;
 	spr->img = mlx_new_image(mlx, l, l);
 	spr->addr = mlx_get_data_addr(
@@ -53,7 +60,6 @@ void	border_preload(void *mlx, t_image *spr, int display[2])
 		while (++y < l - 1)
 			pixel_put(spr, x, y, 0xffffff);
 	}
-	
 }
 
 void	img_init(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:18:39 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/11 14:18:10 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/05/13 15:03:24 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	len_line(char *file)
 	return (x);
 }
 
-int	fc_rgb_shift(char *file)
+int	rgb_shift(char *file)
 {
 	int	r;
 	int	g;
@@ -44,9 +44,9 @@ int	fc_rgb_shift(char *file)
 void	line_process_fc(t_data *data, char *file, int x)
 {
 	if (!stncmp(file + x, "F ", 2))
-		data->fdata.floor = fc_rgb_shift(file + x + 2);
+		data->fdata.floor = rgb_shift(file + x + 2);
 	if (!stncmp(file + x, "C ", 2))
-		data->fdata.celling = fc_rgb_shift(file + x + 2);
+		data->fdata.celling = rgb_shift(file + x + 2);
 }
 
 int	line_process(t_data *data, char *file, int x)
