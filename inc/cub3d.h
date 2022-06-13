@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 17:56:00 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/12 15:33:08 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../mlx/mlx.h"
+
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define SPEED 0.1
+
+# define W_KEY 13
+# define S_KEY 1
+# define A_KEY 0
+# define D_KEY 2
+# define ESC_KEY 53
 
 typedef struct s_file_data {
 	char	*file;
@@ -40,39 +50,64 @@ typedef struct s_image {
 }	t_image;
 
 typedef struct s_minimap {
-	t_image	*mini;
-	int		ps;
-	int		pos_p[2];
-	int		range;
+	float	sqr;
 	int		l;
-	int		x;
-	int		y;
+	float	ogx;
+	float	ogy;
+	int		x_max;
+	int		y_max;
+	int		map_x_max;
+	int		map_y_max;
+	t_image	*img;
 }	t_minimap;
 
 typedef struct s_texture {
+	t_image	wall;
 	t_image	north;
 	t_image	south;
 	t_image	west;
 	t_image	east;
-	t_image	floor;
-	t_image	celling;
 	t_image	mini;
-	t_image	border;
+	t_image	left_border;
+	t_image	down_border;
 }	t_texture;
 
 typedef struct s_player {
-	float	pos[2];
+	char	c;
+	float	px;
+	float	py;
+	float	pdx;
+	float	pdy;
+	float	pa;
+	float	planex;
+	float	planey;
 }	t_player;
+
+typedef struct s_raycast {
+	float	raydirx;
+	float	raydiry;
+	int		mapx;
+	int		mapy;
+	float	sidedistx;
+	float	sidedisty;
+	float	deltadistx;
+	float	deltadisty;
+	int		stepx;
+	int		stepy;
+	float	walldist;
+	int		side;
+	int		hit;
+}	t_raycast;
 
 typedef struct s_data {
 	void		*mlx;
 	void		*win;
 	int			display[2];
 	char		**map;
-	int			run;
 	t_file_data	fdata;
 	t_texture	txt;
-	t_player	play;
+	t_player	p;
+	t_minimap	mp;
 }				t_data;
 
 //src
@@ -80,25 +115,25 @@ typedef struct s_data {
 void	data_init(t_data *data);
 int		data_clear(t_data *data);
 void	fdata_clear(t_file_data *fdata);
+void	mp_init_1(t_data *data);
 
-//le_ray
+//game
+//		image_init.c
+void	img_init(t_data *data);
+//		game_loop.c
+int		game_loop(t_data *data);
+//		minimap.c
+void	minimap(t_data *data);
+//		player_minimap
+void	minimap_player(t_minimap *mp, t_player *p);
+
+//graphic
 //		image.c
 void	pixel_put(t_image *spr, int x, int y, int rgb);
-void	rgb_to_rect_img(void *mlx, t_image *spr, int rgb, int display[2]);
-//		game_init.c
-void	game_init(t_data *data);
-void	img_init(t_data *data);
-//		minimap.c
-void	mp_init(t_minimap *mp, t_image *mini, t_player play, int l);
-void	put_pix_img_map(t_minimap *mp, char c);
-void	minimap(t_data *data);
-void	put_square(t_minimap *mp, int x, int y, int rgb);
-//		print_minimap.c
-void	print_nw_minimap(t_minimap *mp, char **map);
-void	print_ne_minimap(t_minimap *mp, char **map);
-void	print_sw_minimap(t_minimap *mp, char **map);
-void	print_se_minimap(t_minimap *mp, char **map);
-void	print_minimap(t_image *mini, int l, char **map, t_player play);
+int		get_pix_txt(t_data *data, int side, float x, float y);
+//		raycasting.c
+void	raycasting(t_data *data);
+void	build_wall(t_raycast *ray, t_data *data, int x);
 
 //parsing
 //		parsing.c
@@ -130,7 +165,7 @@ int		write_error(char *s, int ret);
 int		stlen(const char *s);
 int		stncmp(const char *s1, const char *s2, int n);
 int		is_num(char c);
-char	*ft_substr(char const	*s, unsigned int start, int len);
+char	*ft_substr(char const	*s, int start, int len);
 int		ft_atoi(const char *str);
 //		stock_2.c
 void	free_tab(char **tab);
@@ -138,10 +173,11 @@ void	*ft_calloc(int count, int size);
 char	*ft_strdup(const char *s1);
 void	stcpy(char *dst, const char *src);
 int		tab_len(char **tab);
+//		stock_3.c
+int		absol(int n);
+float	fabsolf(float n);
 //		ft_sixth.c
 int		only_sp_count(char *file, int y);
 
 void	print_tab(char **tab);
-
- 
 #endif 

@@ -6,32 +6,44 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:05 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 10:28:27 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/13 11:52:00 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+void	mp_init_1(t_data *data)
+{
+	data->mp.l = data->display[0];
+	if (data->mp.l > data->display[1])
+		data->mp.l = data->display[1];
+	data->mp.l = (data->mp.l * 25) / 100;
+	data->mp.sqr = data->mp.l / 10;
+	data->mp.img = &data->txt.mini;
+	data->mp.map_x_max = stlen(data->map[0]);
+	data->mp.map_y_max = tab_len(data->map);
+}
+
 void	data_init(t_data *data)
 {
-	data->display[0] = 1280;
-	data->display[1] = 720;
-	data->map = 0;
-	data->fdata.file = 0;
-	data->fdata.north = 0;
-	data->fdata.south = 0;
-	data->fdata.east = 0;
-	data->fdata.west = 0;
+	data->display[0] = SCREEN_WIDTH;
+	data->display[1] = SCREEN_HEIGHT;
 }
 
 void	img_clear(void	*mlx, t_texture *txt)
 {
-	mlx_destroy_image(mlx, txt->north.img);
-	mlx_destroy_image(mlx, txt->south.img);
-	mlx_destroy_image(mlx, txt->west.img);
-	mlx_destroy_image(mlx, txt->east.img);
-	mlx_destroy_image(mlx, txt->floor.img);
-	mlx_destroy_image(mlx, txt->celling.img);
+	mlx_destroy_image(mlx, txt->wall.img);
+	if (txt->north.img)
+		mlx_destroy_image(mlx, txt->north.img);
+	if (txt->south.img)
+		mlx_destroy_image(mlx, txt->south.img);
+	if (txt->west.img)
+		mlx_destroy_image(mlx, txt->west.img);
+	if (txt->east.img)
+		mlx_destroy_image(mlx, txt->east.img);
+	mlx_destroy_image(mlx, txt->mini.img);
+	mlx_destroy_image(mlx, txt->left_border.img);
+	mlx_destroy_image(mlx, txt->down_border.img);
 }
 
 void	fdata_clear(t_file_data *fdata)

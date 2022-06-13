@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_closed.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:16:37 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 12:16:43 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/08 10:53:36 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	map_grab_player(t_player *play, char **map)
 			if (map[y][x] == 'N' || map[y][x] == 'S'
 				|| map[y][x] == 'W' || map[y][x] == 'E')
 			{
+				play->c = map[y][x];
 				map[y][x] = '0';
-				play->pos[0] = y;
-				play->pos[1] = x;
+				play->py = y;
+				play->px = x;
 			}
 			x++;
 		}

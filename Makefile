@@ -6,7 +6,7 @@
 #    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/05/13 17:45:10 by lsuau            ###   ########.fr        #
+#    Updated: 2022/06/12 17:12:28 by lsuau            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,14 @@ INC 		=	inc/cub3d.h
 SRC			=	main.c \
 				data.c
 
-RAY			=	image.c \
-				game_init.c \
+GAME		=	game_loop.c \
+				image_init.c \
 				minimap.c \
-				print_minimap.c
+				player_minimap.c
+
+GRAPH		=	image.c \
+				raycasting.c \
+				raycasting_2.c
 
 PARSING		=	parsing.c \
 				file_data_extract.c \
@@ -34,17 +38,18 @@ PARSING		=	parsing.c \
 UTILS		= 	error.c \
 				stock_1.c \
 				stock_2.c \
-				ft_sixth.c
+				stock_3.c
 
 SRCS		=	${SRC} \
-				${addprefix le_ray/, ${RAY}} \
+				${addprefix game/, ${GAME}} \
+				${addprefix graphic/, ${GRAPH}} \
 				${addprefix parsing/, ${PARSING}} \
 				${addprefix utils/, ${UTILS}}
 
 OBJS		=	${addprefix objs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
-CFLAGS		=	#-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 
 all:		${NAME}
 

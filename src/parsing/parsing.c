@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:11:09 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 17:54:57 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/05 14:38:59 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	map_parsing(t_data *data, char *name)
 		return (1);
 	if (data_extract(data, data->fdata.file))
 		return (write_error("malloc", 1));
-	if (check_map_closed(&data->play, data->map)
+	if (check_map_closed(&data->p, data->map)
 		|| check_txt_path(&data->fdata))
 	{
 		free_tab(data->map);

@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:29:23 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/02 19:03:50 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/12 15:19:08 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_num(char c)
 	return (0);
 }
 
-char	*ft_substr(char const	*s, unsigned int start, int len)
+char	*ft_substr(char const	*s, int start, int len)
 {
 	int		x;
 	int		y;

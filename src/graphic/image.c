@@ -6,7 +6,7 @@
 /*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:22:54 by lsuau             #+#    #+#             */
-/*   Updated: 2022/05/13 17:50:38 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/12 17:10:53 by lsuau            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,30 @@ void	pixel_put(t_image *spr, int x, int y, int rgb)
 {
 	char	*pixel;
 
-	pixel = spr->addr + (y * spr->line_len + x * (spr->bpp / 8));
+	pixel = spr->addr
+		+ (y * spr->line_len + x * (int)((float)spr->bpp * 0.125));
 	*(int *)pixel = rgb;
 }
 
-void	rgb_to_rect_img(void *mlx, t_image *spr, int rgb, int display[2])
+int	get_pix_txt(t_data *data, int side, float x, float y)
 {
-	int	x;
-	int	y;
+	t_image	*img;
+	char	*pixel;
+	int		rgb;
 
-	spr->img = mlx_new_image(mlx, display[0], display[1] / 2);
-	spr->addr = mlx_get_data_addr(
-			spr->img, &spr->bpp, &spr->line_len, &spr->endian);
-	x = 0;
-	while (x < display[0])
-	{
-		y = 0;
-		while (y < (display[1] / 2))
-		{
-			pixel_put(spr, x, y, rgb);
-			y++;
-		}
-		x++;
-	}
+	img = 0;
+	if (side == 0)
+		img = &data->txt.east;
+	else if (side == 1)
+		img = &data->txt.west;
+	else if (side == 2)
+		img = &data->txt.south;
+	else if (side == 3)
+		img = &data->txt.north;
+	x = x - floor(x);
+	y = floor(y * img->wi_he[1]) * img->line_len;
+	x = floor(x * img->wi_he[0]) * (img->bpp / 8);
+	pixel = img->addr + ((int)y + (int)x);
+	rgb = *(int *)pixel;
+	return (rgb);
 }
