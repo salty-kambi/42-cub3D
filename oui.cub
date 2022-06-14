@@ -1,8 +1,11 @@
 
-NO texture/iron.xpm
-SO texture/iron.xpm
-WE texture/iron.xpm
-EA texture/cacs
+
+
+
+NO texture/pipe.xpm
+SO texture/etoiles.xpm
+WE texture/etoiles.xpm
+EA texture/menace.xpm
 C 100, 90, 100
 F 99, 67, 34
 
@@ -12,3 +15,7 @@ F 99, 67, 34
 1000000S0001001
 100000000000001
 111111111111111
+
+
+
+

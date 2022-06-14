@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:22:54 by lsuau             #+#    #+#             */
-/*   Updated: 2022/06/12 17:10:53 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/14 14:07:48 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int	get_pix_txt(t_data *data, int side, float x, float y)
 	x = floor(x * img->wi_he[0]) * (img->bpp / 8);
 	pixel = img->addr + ((int)y + (int)x);
 	rgb = *(int *)pixel;
+	if (rgb == -16777216)
+		rgb = 0xFFFFFF;
 	return (rgb);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+         #
+#    By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 10:06:54 by lsuau             #+#    #+#              #
-#    Updated: 2022/06/12 17:12:28 by lsuau            ###   ########.fr        #
+#    Updated: 2022/06/14 13:58:05 by mapontil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC			=	main.c \
 GAME		=	game_loop.c \
 				image_init.c \
 				minimap.c \
+				movement.c \
 				player_minimap.c
 
 GRAPH		=	image.c \
@@ -49,7 +50,7 @@ SRCS		=	${SRC} \
 OBJS		=	${addprefix objs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -o3
 
 all:		${NAME}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:12:59 by lsuau             #+#    #+#             */
-/*   Updated: 2022/06/12 15:33:08 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/14 11:03:52 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
-# define SPEED 0.1
+# define SPEED 0.05
 
 # define W_KEY 13
 # define S_KEY 1
@@ -39,6 +39,14 @@ typedef struct s_file_data {
 	int		floor;
 	int		celling;
 }	t_file_data;
+
+typedef struct s_movement
+{
+	int	right;
+	int	left;
+	int	forward;
+	int	backward;
+}	t_movement;
 
 typedef struct s_image {
 	void	*img;
@@ -108,6 +116,7 @@ typedef struct s_data {
 	t_texture	txt;
 	t_player	p;
 	t_minimap	mp;
+	t_movement	m;
 }				t_data;
 
 //src
@@ -126,6 +135,11 @@ int		game_loop(t_data *data);
 void	minimap(t_data *data);
 //		player_minimap
 void	minimap_player(t_minimap *mp, t_player *p);
+//		movement.c
+void	up_down_movement(t_player *p, char **map, int key);
+void	rotate_movement(t_player *p, float speed);
+void	movement_init(t_data *data);
+void	movement(t_movement *m, t_player *p, char **map);
 
 //graphic
 //		image.c

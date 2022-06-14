@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuau <lsuau@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapontil <mapontil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:16:41 by lsuau             #+#    #+#             */
-/*   Updated: 2022/06/13 11:52:53 by lsuau            ###   ########.fr       */
+/*   Updated: 2022/06/14 10:15:26 by mapontil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	game_init(t_data *data)
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(
 			data->mlx, data->display[0], data->display[1], "cub3D");
+	movement_init(data);
 	mp_init_1(data);
 	img_init(data);
 	fdata_clear(&data->fdata);
